@@ -1,0 +1,130 @@
+body {
+	background-color: #ddd;
+	color: #222;
+	font-family: Helvetica;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	-webkit-text-size-adjust: none;
+	height: 500px;
+}
+
+#header h1 {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 10px;
+	line-height: 20px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0;
+	text-overflow: ellipsis;
+	color: #FFFFFF;
+	background: url(img/iPhoneToolbar.png) #6d84a2 repeat-x;
+	border-bottom: 1px solid #2d3642;
+}
+
+.topRightButton {
+    position: absolute;
+    top: 8px;
+    right: 6px;
+    -webkit-border-image: url(img/iPhoneButton.png) 0 5 0 5;
+    -webkit-border-radius: 0;
+    border-width: 0 5px 0 5px;
+    padding: 0;
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0;
+    text-decoration: none;
+    background: none;
+}
+
+.backButton {
+    position: absolute;
+    top: 8px;
+	left: 6px;
+    -webkit-border-image: url(img/iPhoneBackButton.png) 0 8 0 14;
+    border-width: 0 8px 0 14px;
+    line-height: 28px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0;
+    text-decoration: none;
+    background: none;
+}
+
+
+a.whiteButton {
+	display: block;
+	margin: 10px;
+	/*width: 250px; /* if no width was set, the button would 
+                       expand to the width of its parent */
+	text-align: center;
+	line-height: 46px;
+	font-family: Helvetica;
+	font-weight: bold;
+	font-size: 20px;
+	text-decoration: none;
+	color: #000;
+	text-shadow: #fff 0px 1px 1px;
+	border-width: 0 14px;
+	-webkit-border-image: url(img/whiteButton.png) 0 14 0 14;
+}
+
+a.redButton {
+	display: block;
+	margin: 10px;
+	/*width: 250px; /* if no width was set, the button would 
+                       expand to the width of its parent */
+	text-align: center;
+	line-height: 46px;
+	font-family: Helvetica;
+	font-weight: bold;
+	font-size: 20px;
+	text-decoration: none;
+	color: #ffffff;
+	text-shadow: #777 0px 1px 1px;
+	border-width: 0 14px;
+	-webkit-border-image: url(img/redButton.png) 0 14 0 14;
+}
+
+ul {
+	list-style: none;
+	margin: 10px;
+	padding: 0;
+}
+
+ul li {
+	background-color: #FFFFFF;
+	border: 1px solid #999999;
+	color: #222222;
+	display: block;
+	font-size: 17px;
+	font-weight: bold;
+	margin-bottom: -1px;
+	padding: 12px 10px;
+	text-decoration: none;
+}
+
+ul li:first-child {
+	-webkit-border-top-left-radius: 8px;
+	-webkit-border-top-right-radius: 8px;
+}
+
+ul li:last-child {
+	-webkit-border-bottom-left-radius: 8px;
+	-webkit-border-bottom-right-radius: 8px;
+}
+
+input[type=text] {
+    -webkit-text-size-adjust: 140%;
+    border: 0;
+    font-size: 16px;
+    font-weight: normal;
+    width: 100%;
+}
