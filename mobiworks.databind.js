@@ -9,10 +9,13 @@ if (typeof Object.create !== 'function') {
 
 var mobiworks = window.mobiworks || {};
 
-$(function () {
-    mobiworks.databind_div = $("<div id=\"__temp\">").hide();
-    $("body").append(mobiworks.databind_div);
-});
+jQuery.fn.getRootObj = function() {
+    var current = this;
+    while (current && !current.data("rootObj")) {
+        current = current.parent().eq(0);
+    }
+    return current.data("rootObj");
+}
 
 mobiworks.databind_render = function (node, observableList, rootObj) {
     var array = observableList.array();

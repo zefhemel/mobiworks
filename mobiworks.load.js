@@ -35,6 +35,7 @@ mobiworks.call = function(screenName, args, callback) {
                     }
                 });
             });
+            mobiworks.view.registerAll();
         });
     });
 }

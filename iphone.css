@@ -8,7 +8,8 @@ body {
 	overflow: hidden;
 	-webkit-user-select: none;
 	-webkit-text-size-adjust: none;
-	height: 500px;
+	/*height: 500px;*/
+	background: rgb(197, 204, 211) url(img/stripes.png);
 }
 
 div.screen {
@@ -173,10 +174,11 @@ li a.button {
 	padding-right: 15px;
 	z-index: 3;
 	color: #fff;
-	text-shadow: #000 0px -1px 1px;
 	text-decoration: none;
 	font-size: 12px;
-	-webkit-border-image: url(img/red.png) 0 10 0 10;
+	-webkit-border-image: url(img/redButton.png) 0 12 0 12;
+	color: #fff;
+	text-shadow: #7a0001 0 -1px 0;
 }
 
 li.arrow {
