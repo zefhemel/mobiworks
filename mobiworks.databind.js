@@ -9,15 +9,15 @@ if (typeof Object.create !== 'function') {
 
 var mobiworks = window.mobiworks || {};
 
-$(function() {
+$(function () {
     mobiworks.databind_div = $("<div id=\"__temp\">").hide();
     $("body").append(mobiworks.databind_div);
 });
 
-mobiworks.databind_render = function(node, observableList, rootObj) {
+mobiworks.databind_render = function (node, observableList, rootObj) {
     var array = observableList.array();
     var template;
-    if(node.data("template")) {
+    if (node.data("template")) {
         template = node.data("template");
     } else {
         template = node.html();
@@ -26,26 +26,37 @@ mobiworks.databind_render = function(node, observableList, rootObj) {
     var iteratorItem = node.attr("item");
     node.empty();
     for ( var j = 0; j < array.length; j++) {
-        var subRootObj = Object.create(rootObj);
-        node.append(template);
-        subRootObj[iteratorItem] = array[j];
-        mobiworks.databind(node.last(), subRootObj);
+        (function () {
+            var subRootObj = Object.create(rootObj);
+            node.append(template);
+            subRootObj[iteratorItem] = array[j];
+            mobiworks.databind(node.children().last(), subRootObj);
+            // console.log(node.children().last())
+        }());
     }
-    
+
     // Add listeners
-    observableList.subscribe("add", function() {
+    observableList.subscribe("add", function () {
         mobiworks.databind_render(node, observableList, rootObj);
     });
 }
 mobiworks.databind = function (rootNode, rootObj) {
+    rootNode.data("rootObj", rootObj); // Persist rootobject in DOM
     var allNodes = rootNode.find("*[databind]");
     var nodeLength = allNodes.length;
     var newNodes = [];
     for ( var i = 0; i < nodeLength; i++) {
-        if (allNodes.eq(i).parents("*[databind]").length === 0) {
+        if (allNodes.eq(i).parents("*[databind]").length === 0
+                && allNodes.eq(i).parents(".view").length === 0) {
             newNodes.push(allNodes.eq(i));
         }
     }
+    if (rootNode.attr("databind")
+            && rootNode.parents("*[databind]").length === 0
+            && rootNode.parents(".view").length === 0) {
+        newNodes.push(rootNode);
+    }
+
     for ( var i = 0; i < newNodes.length; i++) {
         (function () {
             var node = newNodes[i];
@@ -82,4 +93,5 @@ mobiworks.databind = function (rootNode, rootObj) {
             }
         }());
     }
+    mobiworks.initEventing(rootNode);
 }

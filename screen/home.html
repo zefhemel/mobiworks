@@ -3,6 +3,25 @@
 <a href="#" class="topRightButton" id="add-button">Add</a>
 </div>
 <ul databind="tasks" item="t">
-    <li databind="t.name"></li>
+    <li databind="t.name" onswipe="swipeditem(t)" class="arrow"></li>
+</ul>
+<ul>
+    <li> Hello   <a href="#" class="button">Delete</a>
+    </li>
 </ul>
 <a href="#" class="whiteButton" id="close-button">Close</a>
+
+<div id="optionpanel">
+<a class="whiteButton" href="http://zef.me">Visit Zef.me</a>
+<a class="redButton" href="#">Close</a>
+</div>
+
+<div id="non-swipeditem" arg="t" class="view">
+    <li databind="t.name" onswipe="swipeditem(t)"></li>
+</div>
+
+<div id="swipeditem" arg="t" class="view">
+    <li onswipe="non-swipeditem(t)"><span databind="t.name"></span>
+    <a href="#" class="button">Delete</a>
+    </li>
+</div>

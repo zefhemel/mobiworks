@@ -59,3 +59,9 @@ function addSwipeListener (el, listener) {
 
     el.addEventListener('touchstart', onTouchStart, false);
 }
+
+jQuery.fn.swipe = function(callback) {
+    this.each(function(idx, node) {
+        addSwipeListener(node, callback);
+    });
+}

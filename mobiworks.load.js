@@ -10,7 +10,7 @@ mobiworks.call = function(screenName, args, callback) {
             var previousScreen = mobiworks.screenStack[mobiworks.screenStack.length-2];
             $("body > #" + previousScreen.name).hide('slide', {direction: "left"}, 150);
         }
-        var newScreenCode = $("<div id=\"" + screenName + "\" style=\"position: absolute; left: 0; top: 0; width: 100%;\">" + data + "</div>");
+        var newScreenCode = $("<div id=\"" + screenName + "\" class=\"screen\" style=\"position: absolute; left: 0; top: 0; width: 100%;\">" + data + "</div>");
         if(mobiworks.screenStack.length > 1) {
             newScreenCode.hide().appendTo(body).show('slide', {direction: "right"}, 150);
         } else {
@@ -42,4 +42,5 @@ mobiworks.call = function(screenName, args, callback) {
 $(function () {
     mobiworks.call("home", [], function() { location = "http://zef.me"; });
     window.scrollTo(0, 1);
+    //document.ontouchmove = function(e){ e.preventDefault(); } 
 });

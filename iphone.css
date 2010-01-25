@@ -6,8 +6,17 @@ body {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+	-webkit-user-select: none;
 	-webkit-text-size-adjust: none;
 	height: 500px;
+}
+
+div.screen {
+	margin: 0 auto;
+	position: absolute;
+	padding-bottom: 6px;
+	width: 100%;
+	height: 100%
 }
 
 #header h1 {
@@ -26,38 +35,37 @@ body {
 }
 
 .topRightButton {
-    position: absolute;
-    top: 8px;
-    right: 6px;
-    -webkit-border-image: url(img/iPhoneButton.png) 0 5 0 5;
-    -webkit-border-radius: 0;
-    border-width: 0 5px 0 5px;
-    padding: 0;
-    height: 28px;
-    line-height: 28px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #FFFFFF;
-    text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0;
-    text-decoration: none;
-    background: none;
+	position: absolute;
+	top: 8px;
+	right: 6px;
+	-webkit-border-image: url(img/iPhoneButton.png) 0 5 0 5;
+	-webkit-border-radius: 0;
+	border-width: 0 5px 0 5px;
+	padding: 0;
+	height: 28px;
+	line-height: 28px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0;
+	text-decoration: none;
+	background: none;
 }
 
 .backButton {
-    position: absolute;
-    top: 8px;
+	position: absolute;
+	top: 8px;
 	left: 6px;
-    -webkit-border-image: url(img/iPhoneBackButton.png) 0 8 0 14;
-    border-width: 0 8px 0 14px;
-    line-height: 28px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #FFFFFF;
-    text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0;
-    text-decoration: none;
-    background: none;
+	-webkit-border-image: url(img/iPhoneBackButton.png) 0 8 0 14;
+	border-width: 0 8px 0 14px;
+	line-height: 28px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0;
+	text-decoration: none;
+	background: none;
 }
-
 
 a.whiteButton {
 	display: block;
@@ -87,8 +95,8 @@ a.redButton {
 	font-weight: bold;
 	font-size: 20px;
 	text-decoration: none;
-	color: #ffffff;
-	text-shadow: #777 0px 1px 1px;
+	color: #fff;
+	text-shadow: #000 0 1px 0;
 	border-width: 0 14px;
 	-webkit-border-image: url(img/redButton.png) 0 14 0 14;
 }
@@ -122,9 +130,57 @@ ul li:last-child {
 }
 
 input[type=text] {
-    -webkit-text-size-adjust: 140%;
-    border: 0;
-    font-size: 16px;
-    font-weight: normal;
-    width: 100%;
+	-webkit-text-size-adjust: 140%;
+	color: #777;
+	background: #fff url(../.png);
+	border: 0;
+	font: normal 17px Helvetica;
+	padding: 0;
+	display: inline-block;
+	margin-left: 0px;
+	width: 100%;
+	-webkit-appearance: textarea;
+}
+
+div#optionpanel {
+	display: none;
+	background: url(img/blackbg.png) top left repeat-x;
+	text-align: center;
+	padding: 20px 10px 15px 10px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+div#optionpanel h2 {
+	font-size: 17px;
+	color: #fff;
+	text-shadow: #000 0 1px 0;
+}
+
+.view {
+	display: none;
+}
+
+li a.button {
+	position: absolute;
+	right: 25px;
+	margin-top: -3px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	z-index: 3;
+	color: #fff;
+	text-shadow: #000 0px -1px 1px;
+	text-decoration: none;
+	font-size: 12px;
+	-webkit-border-image: url(img/red.png) 0 10 0 10;
+}
+
+li.arrow {
+	background-image: url(img/chevron.png);
+	background-position: right center;
+	background-repeat: no-repeat;
 }
