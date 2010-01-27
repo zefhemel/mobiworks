@@ -2,10 +2,11 @@
 	<h1>Tasks</h1>
 	<a href="#" class="topRightButton" onclick="myapp.screen.home.addTask()">Add</a>
 </div>
+
 <ul databind="tasks" item="t">
-    <li databind="t.name"  onswipe="replaceWithView(this, swipeditem, 't')" class="arrow"></li>
+    <li><input type="checkbox" databind="t.done"/> <span databind="t.name" onswipe="replaceWithView(this, swipeditem, 't')"></span></li>
 </ul>
-<a href="#" class="whiteButton" onclick="myapp.screen.home.showLinks()">Links</a>
+<a href="javascript:void(0)" class="whiteButton" onclick="myapp.screen.home.showLinks()">Links</a>
 
 <div id="optionpanel">
 	<a class="whiteButton" href="http://zef.me">Zef.me</a>
@@ -19,6 +20,6 @@
 
 <div id="swipeditem" arg="t" class="view">
     <li onswipe="replaceWithView(this, nonswipeditem, 't')"><span databind="t.name"></span>
-        <a href="#" class="button">Delete</a>
+        <a href="javascript:void(0)" class="button" onclick="myapp.screen.home.deleteTask($(this).getRootObj().t)">Delete</a>
     </li>
 </div>

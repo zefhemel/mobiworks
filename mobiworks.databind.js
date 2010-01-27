@@ -9,7 +9,7 @@ if (typeof Object.create !== 'function') {
 
 var mobiworks = window.mobiworks || {};
 
-jQuery.fn.getRootObj = function() {
+jQuery.fn.getRootObj = function () {
     var current = this;
     while (current && !current.data("rootObj")) {
         current = current.parent().eq(0);
@@ -39,10 +39,11 @@ mobiworks.databind_render = function (node, observableList, rootObj) {
     }
 
     // Add listeners
-    observableList.subscribe("add", function () {
+    observableList.subscribe( [ "add", "remove", "addAll" ], function () {
         mobiworks.databind_render(node, observableList, rootObj);
     });
 }
+
 mobiworks.databind = function (rootNode, rootObj) {
     rootNode.data("rootObj", rootObj); // Persist rootobject in DOM
     var allNodes = rootNode.find("*[databind]");
@@ -76,21 +77,44 @@ mobiworks.databind = function (rootNode, rootObj) {
                 mobiworks.databind_render(node, current[property], rootObj);
             } else {
                 if ($.inArray(tag, [ "INPUT", "SELECT" ]) != -1) {
-                    current.subscribe("set", function (_, prop, val) {
-                        if (prop === property) {
-                            node.val(val);
-                        }
-                    });
-                    node.keyup(function () { // keyup or onchange?
-                                current[property] = node.val();
+                    switch (node.attr("type")) {
+                    case "text":
+                        if (current.subscribe) {
+                            current.subscribe("set", function (_, prop, val) {
+                                if (prop === property) {
+                                    node.val(val);
+                                }
                             });
-                    node.val(current[property]);
-                } else {
-                    current.subscribe("set", function (_, prop, val) {
-                        if (prop === property) {
-                            node.text(val);
                         }
-                    });
+                        node.keyup(function () { // keyup or onchange?
+                                    current[property] = node.val();
+                                });
+                        node.val(current[property]);
+                        break;
+                    case "checkbox":
+                        if (current.subscribe) {
+                            current.subscribe("set", function (_, prop, val) {
+                                if (prop === property) {
+                                    node.attr("checked", val);
+                                }
+                            });
+                        }
+                        node.change(function () {
+                            current[property] = node.attr("checked");
+                        });
+                        node.attr("checked", current[property]);
+                        break;
+                    }
+                } else if (tag == "IMG") {
+                    node.attr("src", current[property]);
+                } else {
+                    if (current.subscribe) {
+                        current.subscribe("set", function (_, prop, val) {
+                            if (prop === property) {
+                                node.text(val);
+                            }
+                        });
+                    }
                     node.text(current[property]);
                 }
             }
