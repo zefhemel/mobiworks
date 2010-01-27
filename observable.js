@@ -121,11 +121,14 @@ observable.list = function (items, makeItemsObservable) {
 
 observable.object = function (o, observedProperties) {
     var that = observable.observable();
+    var delegatedProperties = [];
     if (!observedProperties) {
         observedProperties = [];
         for ( var p in o) {
             if (o.hasOwnProperty(p) && typeof o[p] !== 'function') {
                 observedProperties.push(p);
+            } else if(typeof o[p] === 'function') {
+                delegatedProperties.push(p);
             }
         }
     }
@@ -140,6 +143,14 @@ observable.object = function (o, observedProperties) {
             });
             that.__defineGetter__(p, function () {
                 that.fire("get", p);
+                return o[p];
+            });
+        })();
+    }
+    for ( var i = 0; i < delegatedProperties.length; i++) {
+        (function () { // Enforce a scope in order not to put 'p' in
+            var p = delegatedProperties[i];
+            that.__defineGetter__(p, function () {
                 return o[p];
             });
         })();

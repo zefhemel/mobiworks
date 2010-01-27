@@ -15,20 +15,28 @@ screen.home.hideLinks = function() {
 
 screen.home.deleteTask = function(t) {
     //$.jGrowl("Task removed.");
+    t.remove();
     tasks.remove(t);
 }
 
 screen.home.addTask = function() {
     mobiworks.call("screen.add", null, function(name) {
         if(name) {
-            tasks.add(observable.object({"name": name, "done": false}));
+            var t = mobiworks.orm.create('Task');
+            t.name = name;
+            t.done = false;
+            t.save();
+            tasks.add(t);
         }
     });    
 }
 
 screen.home.init = function(args, callback) {
-    tasks.add(observable.object({name: "Task 1", done: false}));
-    tasks.add(observable.object({name: "Task 2", done: true}));
+    //tasks.add(observable.object({name: "Task 1", done: false}));
+    //tasks.add(observable.object({name: "Task 2", done: true}));
+    mobiworks.orm.all('Task', function(allTasks) {
+        tasks.addAll(allTasks);
+    });
     $("#screen_home").databind(window);
     /*setTimeout(function() {
         $.getJSON("http://twitter.com/status/user_timeline/zef.json?count=10&callback=?", function(updates) {
