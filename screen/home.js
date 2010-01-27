@@ -1,39 +1,38 @@
-var myapp = window.myapp || {};
-myapp.screen = myapp.screen || {};
+var screen = window.screen || {};
 
-myapp.screen.home = {};
+screen.home = {};
 
-myapp.tasks = observable.list([], true);
-myapp.updates = observable.list([], false);
+tasks = observable.list([], true);
+//updates = observable.list([], false);
 
-myapp.screen.home.showLinks = function() {
+screen.home.showLinks = function() {
     $("#optionpanel").slideDown("fast");    
 }
 
-myapp.screen.home.hideLinks = function() {
+screen.home.hideLinks = function() {
     $("#optionpanel").slideUp("fast");    
 }
 
-myapp.screen.home.deleteTask = function(t) {
-    myapp.tasks.remove(t);
+screen.home.deleteTask = function(t) {
+    //$.jGrowl("Task removed.");
+    tasks.remove(t);
 }
 
-myapp.screen.home.addTask = function() {
-    mobiworks.call("add", null, function(name) {
+screen.home.addTask = function() {
+    mobiworks.call("screen.add", null, function(name) {
         if(name) {
-            myapp.tasks.add(observable.object({"name": name, "done": false}));
+            tasks.add(observable.object({"name": name, "done": false}));
         }
     });    
 }
 
-myapp.screen.home.init = function(args, callback) {
-    myapp.tasks.add(observable.object({name: "Task 1", done: false}));
-    myapp.tasks.add(observable.object({name: "Task 2", done: true}));
-    mobiworks.databind($("#home"), myapp);
-    mobiworks.initEventing($("#home"));
+screen.home.init = function(args, callback) {
+    tasks.add(observable.object({name: "Task 1", done: false}));
+    tasks.add(observable.object({name: "Task 2", done: true}));
+    $("#screen_home").databind(window);
     /*setTimeout(function() {
         $.getJSON("http://twitter.com/status/user_timeline/zef.json?count=10&callback=?", function(updates) {
-            myapp.updates.addAll(updates);
+            updates.addAll(updates);
         });
     }, 100);*/
 }

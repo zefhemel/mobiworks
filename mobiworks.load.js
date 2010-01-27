@@ -1,47 +1,58 @@
 var mobiworks = window.mobiworks || {};
 mobiworks.screenStack = [];
+mobiworks.screenCache = {};
 
 mobiworks.call = function(screenName, args, callback) {
-    var screen = {"name": screenName, "args": args, "callback": callback};
-    mobiworks.screenStack.push(screen);
-    $.get("screen/" + screenName + ".html", function(data) {
-        var body = $("body");
-        if(mobiworks.screenStack.length > 1) {
-            var previousScreen = mobiworks.screenStack[mobiworks.screenStack.length-2];
-            $("body > #" + previousScreen.name).hide('slide', {direction: "left"}, 150);
+    var screenFrame = {"name": screenName, "args": args, "callback": callback, "div": screenName.replace('.', '_')};
+    mobiworks.screenStack.push(screenFrame);
+    
+    var callbackFn = function() {
+        // when callback function is called (i.e. return)
+        mobiworks.screenStack.pop();
+        if(mobiworks.screenStack.length > 0) {
+            var previousScreen = mobiworks.screenStack[mobiworks.screenStack.length-1];
+            $("body > #" + screenFrame.div).hide('slide', {direction: "right"}, 150, function() {
+                $("body > #" + screenFrame.div).remove();
+            });
+            $("body > #" + previousScreen.div).show('slide', {direction: "left"}, 150);
         }
-        var newScreenCode = $("<div id=\"" + screenName + "\" class=\"screen\" style=\"position: absolute; left: 0; top: 0; width: 100%;\">" + data + "</div>");
-        if(mobiworks.screenStack.length > 1) {
-            newScreenCode.hide().appendTo(body).show('slide', {direction: "right"}, 150);
-        } else {
-            newScreenCode.appendTo(body);
+        if(callback) {
+            callback.apply(null, arguments);
         }
-        setTimeout(scrollTo, 0, 0, 1);
-        $(function() {
-            $.getScript("screen/" + screenName + ".js", function() {
-                screen.object = window[window.applicationNamespace].screen[screenName];
-                screen.object.init(args, function() {
-                    // when callback funciton is called (i.e. return)
-                    mobiworks.screenStack.pop();
-                    if(mobiworks.screenStack.length > 0) {
-                        var previousScreen = mobiworks.screenStack[mobiworks.screenStack.length-1];
-                        $("body > #" + screen.name).hide('slide', {direction: "right"}, 150, function() {
-                            $("body > #" + screen.name).remove();
-                        });
-                        $("body > #" + previousScreen.name).show('slide', {direction: "left"}, 150);
+    };
+    if(!mobiworks.screenCache[screenName]) {
+        var screenPath = screenName.replace('.', '/');
+        $.getScript(screenPath + ".js", function() {
+            mobiworks.screenCache[screenName] = eval(screenName);
+            obj = mobiworks.screenCache[screenName]; //window[window.applicationNamespace].screen[screenName];
+            $.get(screenPath + ".html", function(data) {
+                var newScreenCode = $("<div id=\"" + screenFrame.div + "\" class=\"screen\" style=\"position: absolute; left: 0; top: 0; width: 100%;\">" + data + "</div>");
+                obj.show = function() {
+                    var code = newScreenCode.clone();
+                    var body = $("body");
+                    if(mobiworks.screenStack.length > 1) {
+                        var previousScreen = mobiworks.screenStack[mobiworks.screenStack.length-2];
+                        $("body > #" + previousScreen.div).hide('slide', {direction: "left"}, 150);
                     }
-                    if(callback) {
-                        callback.apply(null, arguments);
+                    if(mobiworks.screenStack.length > 1) {
+                        code.hide().appendTo(body).show('slide', {direction: "right"}, 150);
+                    } else {
+                        code.appendTo(body);
                     }
+                    setTimeout(scrollTo, 0, 0, 1);
+                }
+                obj.show();
+                $(function() {
+                    obj.init(args, callbackFn);
+                    newScreenCode.registerViews(obj);
                 });
             });
-            mobiworks.view.registerAll();
         });
-    });
+    } else {
+        obj = mobiworks.screenCache[screenName];
+        obj.show();
+        $(function() {
+            obj.init(args, callbackFn);
+        });
+    }
 }
-
-$(function () {
-    mobiworks.call("home", [], function() { location = "http://zef.me"; });
-    window.scrollTo(0, 1);
-    //document.ontouchmove = function(e){ e.preventDefault(); } 
-});

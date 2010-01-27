@@ -1,14 +1,14 @@
-var myapp = window.myapp || {};
-myapp.screen = myapp.screen || {};
+var screen = window.screen || {};
 
-myapp.screen.add = {};
-myapp.screen.add.init = function(args, callback) {
+screen.add = {};
+
+screen.add.init = function(args, callback) {
     var task = observable.object({name: ""});
-    mobiworks.databind($("#add"), {newTask: task});
-    $("#add #back-button").bind('click', function() {
+    $("#screen_add").databind({newTask: task});
+    $("#screen_add #back-button").bind('click', function() {
         callback(false);
     });
-    $("#add #add-button").click(function() {
+    $("#screen_add #add-button").click(function() {
         callback(task.name);
     });
 }

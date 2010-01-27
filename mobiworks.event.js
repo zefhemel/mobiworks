@@ -3,13 +3,13 @@ var mobiworks = window.mobiworks || {};
 function replace (node, view) {
     node = $(node);
     // find the parent node holding the data
-    var rootObj = node.getRootObj();
+    var datasource = node.datasource();
     view.hide();
     node.hide('slide', {
         direction: "left"
     }, 100, function () {
         node.replaceWith(view);
-        mobiworks.databind(view, rootObj);
+        view.databind(datasource);
         view.show('slide', {
             direction: "right"
         }, 100);
@@ -17,17 +17,17 @@ function replace (node, view) {
 }
 
 function replaceWithView (node, viewFn, arg) {
-    replace(node, viewFn($(node).getRootObj()[arg]));
+    replace(node, viewFn($(node).datasource()[arg]));
 }
 
-mobiworks.initEventing = function (rootNode) {
-    var eventedNodes = rootNode.find("*[onswipe]");
+jQuery.fn.enableExtraEvents = function () {
+    var eventedNodes = this.find("*[onswipe]");
     var nodes = [];
     for ( var i = 0; i < eventedNodes.length; i++) {
         nodes.push(eventedNodes.eq(i));
     }
-    if (rootNode.attr("onswipe")) {
-        nodes.push(rootNode);
+    if (this.attr("onswipe")) {
+        nodes.push(this);
     }
     var callRegexp = /([^\(]+)\(([^\)]+)\)/;
     for ( var i = 0; i < nodes.length; i++) {

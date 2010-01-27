@@ -5,9 +5,6 @@
   <link rel="stylesheet" type="text/css" href="iphone.css"/>
   <link rel="stylesheet" href="jquery.jgrowl.css" type="text/css"/>
   <meta name="viewport" content="user-scalable=no, width=device-width" />
-<script type="application/x-javascript" charset="utf-8">
-window.applicationNamespace = "myapp";
-</script>
   <script src="gears_init.js" type="application/x-javascript" charset="utf-8"></script>
   <script src="jquery-1.4.min.js" type="application/x-javascript" charset="utf-8"></script>
   <script src="jquery-ui-1.7.2.custom.min.js" type="application/x-javascript" charset="utf-8"></script>
@@ -19,6 +16,13 @@ window.applicationNamespace = "myapp";
   <script src="mobiworks.view.js" type="application/x-javascript" charset="utf-8"></script>
   <script src="mobiworks.event.js" type="application/x-javascript" charset="utf-8"></script>
   <script src="mobiworks.load.js" type="application/x-javascript" charset="utf-8"></script>
+<script type="application/x-javascript" charset="utf-8">
+<!--
+$(function () {
+  mobiworks.call("screen.home", null, function() { location = "http://zef.me"; }); 
+});
+//-->
+</script>
 </head>
 <body>
 </body>
