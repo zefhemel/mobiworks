@@ -2,31 +2,40 @@
 <html>
 <head>
   <title>Zodo</title>
-  <link rel="stylesheet" type="text/css" href="iphone.css"/>
-  <link rel="stylesheet" href="jquery.jgrowl.css" type="text/css"/>
-  <meta name="viewport" content="user-scalable=no, width=device-width" />
-  <script src="gears_init.js" type="application/x-javascript" charset="utf-8"></script>
-  <script src="jquery-1.4.min.js" type="application/x-javascript" charset="utf-8"></script>
-  <script src="jquery-ui-1.7.2.custom.min.js" type="application/x-javascript" charset="utf-8"></script>
-  <script src="jquery.jgrowl.js" type="application/x-javascript" charset="utf-8"></script>
-  <script src="gestures.js" type="application/x-javascript" charset="utf-8"></script>
-  <script src="observable.js" type="application/x-javascript" charset="utf-8"></script>
-  <script src="mobiworks.util.js" type="application/x-javascript" charset="utf-8"></script>
-  <script src="mobiworks.db.js" type="application/x-javascript" charset="utf-8"></script>
-  <script src="mobiworks.orm.js" type="application/x-javascript" charset="utf-8"></script>
-  <script src="mobiworks.databind.js" type="application/x-javascript" charset="utf-8"></script>
-  <script src="mobiworks.view.js" type="application/x-javascript" charset="utf-8"></script>
-  <script src="mobiworks.event.js" type="application/x-javascript" charset="utf-8"></script>
-  <script src="mobiworks.load.js" type="application/x-javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="lib/iphone.css" type="text/css"/>
+  <link rel="stylesheet" href="lib/jquery.jgrowl.css" type="text/css"/>
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  
+  <script src="lib/gears_init.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/jquery-1.4.min.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/jquery-ui-1.7.2.custom.min.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/jquery.jgrowl.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/gestures.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/observable.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/mobiworks.util.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/mobiworks.db.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/mobiworks.orm.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/mobiworks.orientation.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/mobiworks.databind.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/mobiworks.view.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/mobiworks.event.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="lib/mobiworks.load.js" type="application/x-javascript" charset="utf-8"></script>
   <script src="data.js" type="application/x-javascript" charset="utf-8"></script>
 <script type="application/x-javascript" charset="utf-8">
 <!--
 $(function () {
   mobiworks.call("screen.home", null, function() { location = "http://zef.me"; });
+  //var height = $("#optionpanel").height();
+  //$("#optionpanel").css("top", window.innerHeight-height+30);
 });
 //-->
 </script>
 </head>
 <body>
+   <div id="optionpanel">
+      <a class="whiteButton" href="http://zef.me">Zef.me</a>
+      <a class="whiteButton" href="http://www.google.com">Google</a>
+      <a class="redButton" href="javascript:void(0)" onclick="screen.home.hideLinks()">Close</a>
+   </div>
 </body>
 </html>

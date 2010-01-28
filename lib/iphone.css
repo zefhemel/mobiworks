@@ -8,8 +8,8 @@ body {
 	overflow: hidden;
 	-webkit-user-select: none;
 	-webkit-text-size-adjust: none;
-	/*height: 500px;*/
 	background: rgb(197, 204, 211) url(img/stripes.png);
+	height: 500px;
 }
 
 div.screen {

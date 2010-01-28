@@ -1,26 +1,21 @@
 <div id="header">
 	<h1>Tasks</h1>
-	<a href="#" class="topRightButton" onclick="screen.home.addTask()">Add</a>
+	<a href="javascript:void(0)" class="topRightButton" onclick="screen.home.addTask()">Add</a>
 </div>
 
 <ul databind="tasks" item="t">
-    <li onswipe="replaceWithView(this, screen.home.swipeditem, 't')"><input type="checkbox" databind="t.done"/> <span databind="t.name" ></span></li>
+    <li onlandscapeleft="replaceWithView(this, screen.home.swipeditem, 't')"><input type="checkbox" databind="t.done"/> <span databind="t.name" ></span></li>
 </ul>
 <a href="javascript:void(0)" class="whiteButton" onclick="screen.home.showLinks()">Links</a>
-
-<div id="optionpanel">
-	<a class="whiteButton" href="http://zef.me">Zef.me</a>
-    <a class="whiteButton" href="http://www.google.com">Google</a>
-	<a class="redButton" href="#" onclick="screen.home.hideLinks()">Close</a>
-</div>
-
+<button onclick="mobiworks.orientation.fire('portrait')">Portrait</button>
+<button onclick="mobiworks.orientation.fire('landscapeLeft')">Landscape left</button>
 <!-- views are turned into functions attached to the current screen namespace (e.g. screen.home.swipeditem(t) in this case) -->
 <div class="view" id="nonswipeditem" arg="t">
-    <li onswipe="replaceWithView(this, screen.home.swipeditem, 't')"><input type="checkbox" databind="t.done"/> <span databind="t.name" ></span></li>
+    <li onlandscapeleft="replaceWithView(this, screen.home.swipeditem, 't')"><input type="checkbox" databind="t.done"/> <span databind="t.name" ></span></li>
 </div>
 
-<div id="swipeditem" arg="t" class="view">
-    <li onswipe="replaceWithView(this, screen.home.nonswipeditem, 't')"><span databind="t.name"></span>
+<div class="view" id="swipeditem" arg="t">
+    <li onportrait="replaceWithView(this, screen.home.nonswipeditem, 't')"><span databind="t.name"></span>
         <a href="javascript:void(0)" class="button" onclick="screen.home.deleteTask($(this).datasource().t)">Delete</a>
     </li>
 </div>
