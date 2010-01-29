@@ -14,7 +14,6 @@ screen.home.hideLinks = function() {
 }
 
 screen.home.deleteTask = function(t) {
-    //$.jGrowl("Task removed.");
     t.remove();
     tasks.remove(t);
 }
@@ -37,7 +36,9 @@ screen.home.init = function(args, callback) {
     mobiworks.orm.all('Task', function(allTasks) {
         tasks.addAll(allTasks);
     });
-    $("#screen_home").databind(window);
+    $("#screen_home").scope({tasks: tasks});
+    //$("#screen_home").initScope();
+    $("#screen_home").databind();
     /*setTimeout(function() {
         $.getJSON("http://twitter.com/status/user_timeline/zef.json?count=10&callback=?", function(updates) {
             updates.addAll(updates);
