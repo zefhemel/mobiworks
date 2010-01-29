@@ -5,24 +5,23 @@
 <span onlandscape="replace(this, 'orientation', 'landscape')" onportrait="replace(this, 'orientation', 'portrait')"></span>
 
 <div class="template" id="portrait">
-<ul databind="tasks" item="t">
-    <li>
-        
-        <div class="template" id="default">
-            <div onswipe="replace(this, 'taskview', 'edit', 'slide')"><input type="checkbox" databind="t.done"/> <span databind="t.name" ></span></div>
-        </div>
-        
-        <div class="template" id="edit">
-            <div onswipe="replace(this, 'taskview', 'default', 'slide')">
-                <span databind="t.name"></span>
-                <a href="javascript:void(0)" class="button" onclick="screen.home.deleteTask($(this).scope().t)">Delete</a>
-            </div>
-        </div>
-    
-        <div class="templatecall" id="taskview" template="default"></div>
-    
-    </li>
-</ul>
+	<ul databind="tasks" item="t">
+	    <li>
+	        <div class="template" id="default">
+	            <div onswipe="replace(this, 'taskview', 'edit', 'slide')"><input type="checkbox" databind="t.done"/> <span databind="t.name" ></span></div>
+	        </div>
+	        
+	        <div class="template" id="edit">
+	            <div onswipe="replace(this, 'taskview', 'default', 'slide')">
+	                <span databind="t.name"></span>
+	                <a href="javascript:void(0)" class="button" onclick="screen.home.deleteTask($(this).scope().t)">Delete</a>
+	            </div>
+	        </div>
+	    
+	        <div class="templatecall" id="taskview" template="default"></div>
+	    
+	    </li>
+	</ul>
 </div>
 
 <div class="template" id="landscape">
