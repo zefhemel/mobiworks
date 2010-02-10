@@ -1,37 +1,55 @@
 <div id="header">
-	<h1>Tasks</h1>
-	<a href="javascript:void(0)" class="topRightButton" onclick="screen.home.addTask()">Add</a>
+    <h1 databind="properties.title">Tasks</h1>
+    <a href="javascript:void(0)" class="topRightButton" onclick="screen.home.addTask()">Add</a>
 </div>
-<span onlandscape="replace(this, 'orientation', 'landscape')" onportrait="replace(this, 'orientation', 'portrait')"></span>
-
+<!--span onlandscape="replace(this, 'orientation', 'landscape')" onportrait="replace(this, 'orientation', 'portrait')"></span-->
 <div class="template" id="portrait">
-	<ul databind="tasks" item="t">
-	    <li>
-	        <div class="template" id="default">
-	            <div onswipe="replace(this, 'taskview', 'edit', 'slide')"><input type="checkbox" databind="t.done"/> <span databind="t.name" ></span></div>
-	        </div>
-	        
-	        <div class="template" id="edit">
-	            <div onswipe="replace(this, 'taskview', 'default', 'slide')">
-	                <span databind="t.name"></span>
-	                <a href="javascript:void(0)" class="button" onclick="screen.home.deleteTask($(this).scope().t)">Delete</a>
-	            </div>
-	        </div>
-	    
-	        <div class="templatecall" id="taskview" template="default"></div>
-	    
-	    </li>
-	</ul>
+    <ul databind="tasks" item="t">
+        <li>
+            <div class="template" id="default">
+                <div onswipe="replace(this, 'taskview', 'edit', 'slide')">
+                    <input type="checkbox" databind="t.done" onclick="screen.home.checkTask($(this))"/><span databind="t.name"></span>
+                </div>
+            </div>
+            <div class="template" id="edit">
+                <div onswipe="replace(this, 'taskview', 'default', 'slide')">
+                    <span databind="t.name"></span>
+                    <a href="javascript:void(0)" class="button" onclick="screen.home.deleteTask($(this).scope().t)">Delete</a>
+                </div>
+            </div>
+            <div class="templatecall" id="taskview" template="default">
+            </div>
+        </li>
+    </ul>
 </div>
-
 <div class="template" id="landscape">
-<ul databind="tasks" item="t">
-    <li>
-        <span databind="t.name"></span>
-        <a href="javascript:void(0)" class="button" onclick="screen.home.deleteTask($(this).scope().t)">Delete</a>
-    </li>
-</ul>
+    <ul databind="tasks" item="t">
+        <li>
+            <span databind="t.name"></span>
+            <a href="javascript:void(0)" class="button" onclick="screen.home.deleteTask($(this).scope().t)">Delete</a>
+        </li>
+    </ul>
 </div>
-<div class="templatecall" id="orientation" template="portrait"></div>
-
-<a href="javascript:void(0)" class="whiteButton" onclick="screen.home.showLinks()">Links</a>
+<div id="scrollwrapper">
+    <div id="content">
+        <div class="templatecall" id="orientation" template="portrait">
+        </div>
+    </div>
+</div>
+<div id="tabbar">
+    <div  onclick="screen.home.setFilter(this, 'all');" class="selected">
+        <img src="tab-ok.png"/>
+        <br/>
+        All
+    </div>
+    <div onclick="screen.home.setFilter(this, 'completed');">
+        <img src="tab-ok.png"/>
+        <br/>
+        Completed
+    </div>
+    <div onclick="screen.home.setFilter(this, 'not-completed');">
+        <img src="tab-ok.png"/>
+        <br/>
+        Not Completed
+    </div>
+</div>

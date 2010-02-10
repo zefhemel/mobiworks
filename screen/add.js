@@ -12,5 +12,5 @@ screen.add.init = function(args, callback) {
     $("#screen_add #add-button").click(function() {
         callback(task.name);
     });
-}
+};
 
