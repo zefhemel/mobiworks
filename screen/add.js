@@ -3,7 +3,7 @@ var screen = window.screen || {};
 screen.add = {};
 
 screen.add.init = function(args, callback) {
-    var task = observable.object({name: ""});
+    var task = new observable.ObservableObject({name: ""});
     $("#screen_add").scope({newTask: task});
     $("#screen_add").databind();
     $("#screen_add #back-button").bind('click', function() {

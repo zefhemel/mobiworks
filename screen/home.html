@@ -8,7 +8,7 @@
         <li>
             <div class="template" id="default">
                 <div onswipe="replace(this, 'taskview', 'edit', 'slide')">
-                    <input type="checkbox" databind="t.done" onclick="screen.home.checkTask($(this))"/><span databind="t.name"></span>
+                    <input type="checkbox" databind="t.done" onchange="screen.home.checkTask($(this))"/><span databind="t.name"></span>
                 </div>
             </div>
             <div class="template" id="edit">
