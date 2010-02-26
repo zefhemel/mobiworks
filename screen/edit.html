@@ -1,0 +1,11 @@
+<div id="header">
+<h1>Edit task</h1>
+<a href="javascript:void(0)" class="backButton" id="back-button">Back</a>
+</div>
+<form>
+<ul>
+    <li><input type="text" placeholder="Task name" databind="ref(fromScope(this, 'task'), 'name')"/></li>
+    <li><textarea databind="ref(fromScope(this, 'task'), 'description')"></textarea></li>
+</ul>
+<a href="javascript:void(0)" id="save-button" class="redButton">Save</a>
+</form>

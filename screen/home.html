@@ -1,20 +1,38 @@
+<div class="template" id="output" farg0="rValue">
+    <span databind="fromScope(this, 'rValue')"></span>
+</div>
+<div class="template" id="inputCheckbox" farg0="rValue">
+    <input type="checkbox" databind="fromScope(this, 'rValue')"/>
+</div>
+<div class="template" id="tabBorder">
+    <div id="scrollwrapper">
+        <div id="content">
+            <div class="templatecall" template="elements"></div>
+        </div>
+    </div>
+</div>
 <div id="header">
-    <h1 databind="properties.title">Tasks</h1>
+    <h1 databind="ref(fromScope(this, 'properties'), 'title')">Tasks</h1>
     <a href="javascript:void(0)" class="topRightButton" onclick="screen.home.addTask()">Add</a>
 </div>
-<!--span onlandscape="replace(this, 'orientation', 'landscape')" onportrait="replace(this, 'orientation', 'portrait')"></span-->
-<div class="template" id="portrait">
-    <ul databind="tasks" item="t">
+<!--<div id="scrollwrapper">
+<div id="content"> -->
+<div class="templatecall" template="tabBorder">
+    <ul databind="ref(fromScope(this), 'tasks')" item="t">
         <li>
             <div class="template" id="default">
-                <div onswipe="replace(this, 'taskview', 'edit', 'slide')">
-                    <input type="checkbox" databind="t.done" onchange="screen.home.checkTask($(this))"/><span databind="t.name"></span>
+                <div onswipe="replace(this, 'taskview', 'edit', [], 'slide')">
+                    <!-- <input type="checkbox" databind="t.done" onchange="screen.home.checkTask($(this))"/> -->
+                    <div class="templatecall" template="inputCheckbox" arg0="ref(fromScope(this, 't'), 'done')" onchange="screen.home.checkTask(fromScope(this, 't'))">
+                    </div>
+                    <div class="templatecall" template="output" arg0="ref(fromScope(this, 't'), 'name')" frits="henk" onclick="window.bla = this; screen.home.editTask(fromScope(this, 't'))">
+                    </div>
                 </div>
             </div>
             <div class="template" id="edit">
-                <div onswipe="replace(this, 'taskview', 'default', 'slide')">
-                    <span databind="t.name"></span>
-                    <a href="javascript:void(0)" class="button" onclick="screen.home.deleteTask($(this).scope().t)">Delete</a>
+                <div onswipe="replace(this, 'taskview', 'default', [], 'slide')">
+                    <span databind="ref(fromScope(this, 't'), 'name')"></span>
+                    <a href="javascript:void(0)" class="button" onclick="screen.home.deleteTask($(this).scope().get('t'))">Delete</a>
                 </div>
             </div>
             <div class="templatecall" id="taskview" template="default">
@@ -22,22 +40,10 @@
         </li>
     </ul>
 </div>
-<div class="template" id="landscape">
-    <ul databind="tasks" item="t">
-        <li>
-            <span databind="t.name"></span>
-            <a href="javascript:void(0)" class="button" onclick="screen.home.deleteTask($(this).scope().t)">Delete</a>
-        </li>
-    </ul>
-</div>
-<div id="scrollwrapper">
-    <div id="content">
-        <div class="templatecall" id="orientation" template="portrait">
-        </div>
-    </div>
-</div>
+<!--    </div>
+</div>-->
 <div id="tabbar">
-    <div  onclick="screen.home.setFilter(this, 'all');" class="selected">
+    <div onclick="screen.home.setFilter(this, 'all');" class="selected">
         <img src="tab-ok.png"/>
         <br/>
         All
